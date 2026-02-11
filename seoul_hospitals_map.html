@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>서울 상급종합병원 위치</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map { height: 100vh; width: 100%; }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  // 지도 초기 중심 (서울 중심)
+  var map = L.map('map').setView([37.55, 127.00], 12);
+
+  // OpenStreetMap 타일레이어
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  // 병원 데이터
+  var hospitals = [
+    {name: "서울아산병원", lat: 37.52643, lon: 127.10958},
+    {name: "삼성서울병원", lat: 37.48863, lon: 127.08323},
+    {name: "서울대학교병원", lat: 37.57904, lon: 126.99910},
+    {name: "세브란스병원 (신촌)", lat: 37.56216, lon: 126.94080},
+    {name: "강북삼성병원", lat: 37.56836, lon: 126.96740},
+    {name: "고려대학교 안암병원", lat: 37.58579, lon: 127.02620},
+    {name: "경희대학교병원", lat: 37.59554, lon: 127.05200},
+    {name: "중앙대학교병원", lat: 37.50696, lon: 126.96060}
+  ];
+
+  // 마커 추가
+  hospitals.forEach(h => {
+    L.marker([h.lat, h.lon]).addTo(map)
+      .bindPopup("<b>" + h.name + "</b>");
+  });
+</script>
+
+</body>
+</html>
